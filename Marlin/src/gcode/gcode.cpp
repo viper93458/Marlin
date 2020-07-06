@@ -59,7 +59,10 @@ GcodeSuite gcode;
 
 #include "../MarlinCore.h" // for idle()
 
-millis_t GcodeSuite::previous_move_ms;
+// Inactivity shutdown
+millis_t GcodeSuite::previous_move_ms = 0,
+         GcodeSuite::max_inactive_time = 0,
+         GcodeSuite::stepper_inactive_time = SEC_TO_MS(DEFAULT_STEPPER_DEACTIVE_TIME);
 
 // Relative motion mode for each logical axis
 static constexpr xyze_bool_t ar_init = AXIS_RELATIVE_MODES;
@@ -541,7 +544,7 @@ void GcodeSuite::process_parsed_command(const bool no_ok/*=false*/) {
       case 120: M120(); break;                                    // M120: Enable endstops
       case 121: M121(); break;                                    // M121: Disable endstops
 
-      #if HAS_HOTEND && HAS_LCD_MENU
+      #if PREHEAT_COUNT
         case 145: M145(); break;                                  // M145: Set material heatup parameters
       #endif
 
