@@ -2,6 +2,9 @@
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
+ * Based on Sprinter and grbl.
+ * Copyright (c) 2011 Camiel Gubbels / Erik van der Zalm
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -18,32 +21,7 @@
  */
 #pragma once
 
-#include <stdint.h>
-
-// Relies on XPT2046-compatible mode of ADS7843,
-// hence no Z1 / Z2 measurements are possible.
-
-#define XPT2046_DFR_MODE 0x00
-#define XPT2046_SER_MODE 0x04
-#define XPT2046_CONTROL  0x80
-
-enum XPTCoordinate : uint8_t {
-  XPT2046_X  = 0x10,
-  XPT2046_Y  = 0x50,
-  XPT2046_Z1 = 0x30,
-  XPT2046_Z2 = 0x40
-};
-
-class XPT2046 {
-public:
-  static void init();
-  static uint8_t read_buttons();
-  bool getTouchPoint(uint16_t &x, uint16_t &y);
-  static bool isTouched();
-  inline void waitForRelease() { while (isTouched()) { /* nada */ } }
-  inline void waitForTouch(uint16_t &x, uint16_t &y) { while (!getTouchPoint(x, y)) { /* nada */ } }
-private:
-  static uint16_t getInTouch(const XPTCoordinate coordinate);
-};
-
-extern XPT2046 touch;
+#define SCK_PIN   13
+#define MISO_PIN  12
+#define MOSI_PIN  11
+#define SS_PIN    20 // SDSS // A.28, A.29, B.21, C.26, C.29
