@@ -81,7 +81,7 @@
 //
 // LCD Pins
 //
-#if HAS_SPI_LCD
+#if HAS_WIRED_LCD
   #define BEEPER_PIN                        PD2
   #define BTN_ENC                           PB3
   #define LCD_PINS_RS                       PC3
@@ -103,7 +103,7 @@
   #else                                           // !MKS_MINI_12864
 
     #define LCD_PINS_D4                     PC1
-    #if ENABLED(ULTIPANEL)
+    #if IS_ULTIPANEL
       #define LCD_PINS_D5                   -1
       #define LCD_PINS_D6                   -1
       #define LCD_PINS_D7                   -1
@@ -111,7 +111,7 @@
 
   #endif // !MKS_MINI_12864
 
-  #if HAS_GRAPHICAL_LCD
+  #if HAS_MARLINUI_U8GLIB
     #ifndef BOARD_ST7920_DELAY_1
       #define BOARD_ST7920_DELAY_1 DELAY_NS(125)
     #endif
@@ -123,7 +123,7 @@
     #endif
   #endif
 
-#endif // HAS_SPI_LCD
+#endif // HAS_WIRED_LCD
 
 // Motor current PWM pins
 #define MOTOR_CURRENT_PWM_XY_PIN            PB0
