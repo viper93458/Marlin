@@ -34,18 +34,18 @@
 #if EITHER(HAS_LCD_MENU, ULTIPANEL_FEEDMULTIPLY)
   #define HAS_ENCODER_ACTION 1
 #endif
-#if (!HAS_ADC_BUTTONS && ENABLED(NEWPANEL)) || BUTTONS_EXIST(EN1, EN2)
+#if ((!HAS_ADC_BUTTONS && IS_NEWPANEL) || BUTTONS_EXIST(EN1, EN2)) && !IS_TFTGLCD_PANEL
   #define HAS_ENCODER_WHEEL 1
 #endif
 #if HAS_ENCODER_WHEEL || ANY_BUTTON(ENC, BACK, UP, DWN, LFT, RT)
   #define HAS_DIGITAL_BUTTONS 1
 #endif
-#if !HAS_ADC_BUTTONS && (ENABLED(REPRAPWORLD_KEYPAD) || (HAS_SPI_LCD && DISABLED(NEWPANEL)))
+#if !HAS_ADC_BUTTONS && (IS_RRW_KEYPAD || (HAS_WIRED_LCD && !IS_NEWPANEL))
   #define HAS_SHIFT_ENCODER 1
 #endif
 
 // I2C buttons must be read in the main thread
-#if EITHER(LCD_I2C_VIKI, LCD_I2C_PANELOLU2)
+#if ANY(LCD_I2C_VIKI, LCD_I2C_PANELOLU2, IS_TFTGLCD_PANEL)
   #define HAS_SLOW_BUTTONS 1
 #endif
 
@@ -53,7 +53,7 @@
   #define MULTI_MANUAL 1
 #endif
 
-#if HAS_SPI_LCD
+#if HAS_WIRED_LCD
 
   #include "../MarlinCore.h"
 
@@ -104,10 +104,9 @@
 
   #endif // HAS_LCD_MENU
 
-#endif // HAS_SPI_LCD
+#endif // HAS_WIRED_LCD
 
-// REPRAPWORLD_KEYPAD (and ADC_KEYPAD)
-#if ENABLED(REPRAPWORLD_KEYPAD)
+#if IS_RRW_KEYPAD
   #define BTN_OFFSET          0 // Bit offset into buttons for shift register values
 
   #define BLEN_KEYPAD_F3      0
@@ -136,7 +135,7 @@
     #define BUTTON_CLICK() RRK(EN_KEYPAD_MIDDLE)
   #endif
 
-#endif
+#endif // IS_RRW_KEYPAD
 
 #if HAS_DIGITAL_BUTTONS
 
@@ -215,7 +214,7 @@
 
 #endif
 
-#if BUTTON_EXISTS(BACK) || HAS_TOUCH_XPT2046
+#if BUTTON_EXISTS(BACK) || EITHER(HAS_TOUCH_XPT2046, IS_TFTGLCD_PANEL)
   #define BLEN_D 3
   #define EN_D _BV(BLEN_D)
   #define LCD_BACK_CLICKED() (buttons & EN_D)
@@ -231,7 +230,7 @@
   #endif
 #endif
 
-#if HAS_GRAPHICAL_LCD
+#if HAS_MARLINUI_U8GLIB
   enum MarlinFont : uint8_t {
     FONT_STATUSMENU = 1,
     FONT_EDIT,
@@ -316,11 +315,11 @@ public:
     static void refresh();
   #else
     FORCE_INLINE static void refresh() {
-      TERN_(HAS_SPI_LCD, refresh(LCDVIEW_CLEAR_CALL_REDRAW));
+      TERN_(HAS_WIRED_LCD, refresh(LCDVIEW_CLEAR_CALL_REDRAW));
     }
   #endif
 
-  #if HAS_SPI_LCD
+  #if HAS_WIRED_LCD
     static bool detected();
     static void init_lcd();
   #else
@@ -381,7 +380,7 @@ public:
     static void pause_print();
     static void resume_print();
 
-    #if HAS_SPI_LCD
+    #if HAS_WIRED_LCD
 
       static millis_t next_button_update_ms;
 
@@ -403,7 +402,7 @@ public:
         static void show_bootscreen();
       #endif
 
-      #if HAS_GRAPHICAL_LCD
+      #if HAS_MARLINUI_U8GLIB
 
         static void set_font(const MarlinFont font_nr);
 
@@ -458,7 +457,7 @@ public:
 
     #endif
 
-    #if HAS_GRAPHICAL_LCD
+    #if HAS_MARLINUI_U8GLIB
       static bool drawing_screen, first_page;
     #else
       static constexpr bool drawing_screen = false, first_page = true;
@@ -577,7 +576,7 @@ public:
 
     static void draw_select_screen_prompt(PGM_P const pref, const char * const string=nullptr, PGM_P const suff=nullptr);
 
-  #elif HAS_SPI_LCD
+  #elif HAS_WIRED_LCD
 
     static constexpr bool lcd_clicked = false;
     static constexpr bool on_status_screen() { return true; }
@@ -633,7 +632,7 @@ public:
   #if HAS_ENCODER_ACTION
 
     static volatile uint8_t buttons;
-    #if ENABLED(REPRAPWORLD_KEYPAD)
+    #if IS_RRW_KEYPAD
       static volatile uint8_t keypad_buttons;
       static bool handle_keypad();
     #endif
@@ -692,7 +691,7 @@ private:
     static void finish_status(const bool persist);
   #endif
 
-  #if HAS_SPI_LCD
+  #if HAS_WIRED_LCD
     #if HAS_LCD_MENU && LCD_TIMEOUT_TO_STATUS > 0
       static bool defer_return_to_status;
     #else
