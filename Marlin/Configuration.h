@@ -504,9 +504,9 @@
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
     //Tronxy Nozzle
-    #define  DEFAULT_Kp 27.25
-    #define  DEFAULT_Ki 1.95
-    #define  DEFAULT_Kd 95.36
+    #define  DEFAULT_Kp 21.61
+    #define  DEFAULT_Ki 1.10
+    #define  DEFAULT_Kd 105.91
   #endif
 #endif // PIDTEMP
 
@@ -991,7 +991,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -49.5, -15.25, -2.15 }
+#define NOZZLE_TO_PROBE_OFFSET { -49.5, -15.25, -2.50 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
