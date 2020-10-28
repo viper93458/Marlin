@@ -547,7 +547,7 @@
 #define  DEFAULT_bedKp 4.89
 #define  DEFAULT_bedKi 0.96
 #define  DEFAULT_bedKd 16.57
-#define MAX_CYCLE_TIME_PID_AUTOTUNE 40L // Marlin has a default 20 minute autotune limit
+//#define MAX_CYCLE_TIME_PID_AUTOTUNE 40L // Marlin has a default 20 minute autotune limit
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
