@@ -503,7 +503,7 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    //Tronxy Nozzle
+    //Tronxy Nozzle (Tune to 220C)
     #define  DEFAULT_Kp 21.61
     #define  DEFAULT_Ki 1.10
     #define  DEFAULT_Kd 105.91
