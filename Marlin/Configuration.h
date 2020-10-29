@@ -543,10 +543,10 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-//Tronxy Bed
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+//Tronxy Bed (Can only tune to 70C)
+  #define DEFAULT_bedKp 121.99
+  #define DEFAULT_bedKi 22.76
+  #define DEFAULT_bedKd 435.91
   //#define MAX_CYCLE_TIME_PID_AUTOTUNE 40L // Marlin has a default 20 minute autotune limit
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
