@@ -504,9 +504,9 @@
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
     //Tronxy Nozzle (Tune to 220C @ 15V)
-    #define  DEFAULT_Kp 16.57
-    #define  DEFAULT_Ki 0.86
-    #define  DEFAULT_Kd 79.54
+    #define  DEFAULT_Kp 16.29
+    #define  DEFAULT_Ki 0.84
+    #define  DEFAULT_Kd 79.17
   #endif
 #endif // PIDTEMP
 
