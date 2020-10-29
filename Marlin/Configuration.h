@@ -503,10 +503,10 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    //Tronxy Nozzle (Tune to 220C)
-    #define  DEFAULT_Kp 21.61
-    #define  DEFAULT_Ki 1.10
-    #define  DEFAULT_Kd 105.91
+    //Tronxy Nozzle (Tune to 220C @ 15V)
+    #define  DEFAULT_Kp 16.57
+    #define  DEFAULT_Ki 0.86
+    #define  DEFAULT_Kd 79.54
   #endif
 #endif // PIDTEMP
 
@@ -543,7 +543,7 @@
   //#define MIN_BED_POWER 0
   //#define PID_BED_DEBUG // Sends debug data to the serial port.
 
-//Tronxy Bed (Can only tune to 70C)
+//Tronxy Bed (Can only tune to 70C @ 15V)
   #define DEFAULT_bedKp 121.99
   #define DEFAULT_bedKi 22.76
   #define DEFAULT_bedKd 435.91
