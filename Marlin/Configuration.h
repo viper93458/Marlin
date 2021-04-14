@@ -1658,7 +1658,7 @@
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
 
-/Added external EEPROM
+//Added external EEPROM
 #define I2C_EEPROM            // Use external EEPROM Module (e.g. AT24C256) connected to I2C Pins as outlined at https://www.instructables.com/id/BigTreeTech-SKR-Pro-V11-Adding-a-EEPROM/
 #ifdef I2C_EEPROM
   #define USE_SHARED_EEPROM 1 // Use Platform-independent Arduino functions for I2C EEPROM
