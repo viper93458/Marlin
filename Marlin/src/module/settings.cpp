@@ -154,8 +154,8 @@
 #endif
 
 #if ENABLED(DGUS_LCD_UI_MKS)
-  #include "../lcd/extui/lib/dgus/DGUSScreenHandler.h"
-  #include "../lcd/extui/lib/dgus/DGUSDisplayDef.h"
+  #include "../lcd/extui/dgus/DGUSScreenHandler.h"
+  #include "../lcd/extui/dgus/DGUSDisplayDef.h"
 #endif
 
 #pragma pack(push, 1) // No padding between variables
@@ -532,6 +532,8 @@ void MarlinSettings::postprocess() {
   TERN_(HAS_LINEAR_E_JERK, planner.recalculate_max_e_jerk());
 
   TERN_(CASELIGHT_USES_BRIGHTNESS, caselight.update_brightness());
+
+  TERN_(EXTENSIBLE_UI, ExtUI::onPostprocessSettings());
 
   // Refresh steps_to_mm with the reciprocal of axis_steps_per_mm
   // and init stepper.count[], planner.position[] with current_position
