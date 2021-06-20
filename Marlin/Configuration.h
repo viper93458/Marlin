@@ -1341,8 +1341,8 @@
 #define X_MIN_POS -3 //The nozzle can actually travel 3mm past the left of the bed
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS X_BED_SIZE +8
-#define Y_MAX_POS Y_BED_SIZE +4
+#define X_MAX_POS X_BED_SIZE + 8 //The nozzle can actually travel 8mm past the right of the bed
+#define Y_MAX_POS Y_BED_SIZE + 4 //The nozzle has to stop 4mm before Y max for most of the bed size to avoid the fan hitting the Z axis
 #define Z_MAX_POS 202
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
